@@ -13,6 +13,13 @@ The RevBayes Docker image currently has the following applications and libraries
 - Create DockerHub account and login
 - Download the RevBayes Docker image by with this shell command: `docker pull sswiston/rb_tp:latest`
 
+## Command-line job
+- Open Docker Desktop to launch the Docker daemon
+- Use helper script to launch a RevBayes container and execute a job script
+    -  *Usage:* `./run_revbayes_docker.sh test.Rev my_job_name`
+- Use `docker run` command to launch a RevBayes container and execute a job script
+    - *Usage:* `docker run --name my_job_name --volume /Users/mlandis/projects/rev-docker:/mnt/project sswiston/rb_tp:latest rb /mnt/project/test.Rev"
+
 ## GUI job
 - Open Docker Desktop
 - Go to Images tab
@@ -29,33 +36,21 @@ The RevBayes Docker image currently has the following applications and libraries
        cd /mnt/project
        rb test.Rev
        ```
-  
-
-## Command-line job
-- Open Docker Desktop
-  - *TBD: Can you run Docker daemon without opening Desktop?*
-- Type command to launch a RevBayes container and execute a job script
-docker run -v "/Users/Sarah/projects/rb_test:/rb_test sswiston/rb_tp:latest" "rb /rb_test/rb_test.Rev"
-Use helper script to launch a RevBayes container and execute a job script
-
 
 ## Cluster job (WUSTL RIS example)
-Login to cluster
-Create cluster batch job script (bash):
-Define variable to mount storage in Docker container filesystem
-Define variable for where to store job output
-Define variables to pass into script and define jobname
-Construct a bsub command for each job we want to run using Docker
-This command calls the RevBayes job script (3) once per submitted job
-Create single RevBayes job script (bash):
-Add path to RevBayes binary to PATH variable
-apparently needed for RIS
-Collect RevBayes analysis variables
-Construct and echo RevBayes string for initialization settings, then pipe echo file into RevBayes command to run job
-Create single RevBayes job script (Rev language):
-Loads data, model, and runs MCMC
-Output will be stored wherever RevBayes script (4) specifies
-
-
-
-
+- SSH into cluster
+- Create cluster batch job script (bash):
+  - *(we'll upload example scripts soon)*
+  - Define variable to mount storage in Docker container filesystem
+  - Define variable for where to store job output
+  - Define variables to pass into script and define jobname
+  - Construct a bsub command for each job we want to run using Docker
+  - This command calls the RevBayes job script (3) once per submitted job
+- Create single RevBayes job script (bash):
+  - *(we'll upload example scripts soon)* 
+  - Add path to RevBayes binary to PATH variable (needed for RIS?)
+  - Collect RevBayes analysis variables
+  - Construct and echo RevBayes string for initialization settings, then pipe echo file into RevBayes command to run job
+- Create single RevBayes job script (Rev language):
+  - Loads data, model, and runs MCMC
+- Output will be stored wherever RevBayes script (4) specifies
