@@ -26,9 +26,9 @@ The RevBayes Docker image currently has the following applications and libraries
 - Click CLI for Command Line Interface
 - Enter the container and run commands as needed, for example:
   - ```shell
-cd /mnt/project
-rb test.Rev
-```
+       cd /mnt/project
+       rb test.Rev
+       ```
   
 
 ## Command-line job
