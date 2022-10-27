@@ -4,10 +4,10 @@
 # e.g. you are located in `~/projects/test_job` and want to execute `run_job.Rev`
 
 # User provides script name in local directory
-SCRIPT_NAME=$1
+SCRIPT_NAME="$1"
 
 # User can provide Docker container name
-CONTAINER_NAME=$2
+CONTAINER_NAME="$2"
 
 # This is where we mount the volume inside the Docker container filesystem
 MOUNT_PATH="/mnt/project"
@@ -19,7 +19,7 @@ VOLUME_STR="$(pwd):${MOUNT_PATH}"
 IMAGE_STR="sswiston/rb_tp:latest"
 
 # Construct the RevBayes command string (binary followed by source script)
-COMMAND_STR="rb ${MOUNT_PATH}/${SCRIPT_NAME}"
+RB_STR="rb ${MOUNT_PATH}/${SCRIPT_NAME}"
 
 # Verify that local script exists
 if [[ ! -f "${SCRIPT_NAME}" ]]; then
@@ -27,9 +27,13 @@ if [[ ! -f "${SCRIPT_NAME}" ]]; then
 	exit 1
 fi
 
-# Create Docker container and run job
+# Construct docker run command string
+CMD_STR="docker run "
 if [[ -n ${CONTAINER_NAME} ]]; then
-	docker run --volume ${VOLUME_STR} --name ${CONTAINER_NAME} {$IMAGE_STR} ${COMMAND_STR}
-else
-	docker run --volume ${VOLUME_STR} ${IMAGE_STR} ${COMMAND_STR}
+	CMD_STR="${CMD_STR} --name ${CONTAINER_NAME}"
 fi
+CMD_STR="${CMD_STR} --volume ${VOLUME_STR} ${IMAGE_STR} ${RB_STR}"
+
+# Execute docker run command string
+echo "Executing \"${CMD_STR}\""
+eval ${CMD_STR}
