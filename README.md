@@ -2,11 +2,18 @@
 
 For using RevBayes with Docker
 
-The RevBayes Docker image currently has the following applications and libraries installed (versions to be added):
+The RevBayes Docker image currently has the following applications and libraries installed:
 - RevBayes
 - TensorPhylo
 - R
 - Python
+- Julia
+- Java
+- Beast/Beagle
+
+The RevBayes Docker image can be found at [hub.docker.com/r/sswiston/rb_tp](https://hub.docker.com/r/sswiston/rb_tp), alongside a README containing information about different tag options and program versions.
+
+For a full tutorial about using RevBayes with Docker: [revbayes.github.io/tutorials/docker/](https://revbayes.github.io/tutorials/docker/)
 
 ## Prerequisites
 - Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
@@ -18,7 +25,7 @@ The RevBayes Docker image currently has the following applications and libraries
 - Use helper script to launch a RevBayes container and execute a job script
     -  *Usage:* `./run_revbayes_docker.sh test.Rev my_job_name`
 - Use `docker run` command to launch a RevBayes container and execute a job script
-    - *Usage:* `docker run --name my_job_name --volume /Users/mlandis/projects/rev-docker:/mnt/project sswiston/rb_tp:latest rb /mnt/project/test.Rev"
+    - *Usage:* `docker run --name my_job_name --volume /Users/Sarah/projects/rev-docker:/mnt/project sswiston/rb_tp:latest rb /mnt/project/test.Rev"
 
 ## GUI job
 - Open Docker Desktop
@@ -36,21 +43,3 @@ The RevBayes Docker image currently has the following applications and libraries
        cd /mnt/project
        rb test.Rev
        ```
-
-## Cluster job (WUSTL RIS example)
-- SSH into cluster
-- Create cluster batch job script (bash):
-  - *(we'll upload example scripts soon)*
-  - Define variable to mount storage in Docker container filesystem
-  - Define variable for where to store job output
-  - Define variables to pass into script and define jobname
-  - Construct a bsub command for each job we want to run using Docker
-  - This command calls the RevBayes job script (3) once per submitted job
-- Create single RevBayes job script (bash):
-  - *(we'll upload example scripts soon)* 
-  - Add path to RevBayes binary to PATH variable (needed for RIS?)
-  - Collect RevBayes analysis variables
-  - Construct and echo RevBayes string for initialization settings, then pipe echo file into RevBayes command to run job
-- Create single RevBayes job script (Rev language):
-  - Loads data, model, and runs MCMC
-- Output will be stored wherever RevBayes script (4) specifies
