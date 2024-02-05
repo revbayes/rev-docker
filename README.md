@@ -27,7 +27,7 @@ For a full tutorial about using RevBayes with Docker: [revbayes.github.io/tutori
 - Use `docker run` command to launch a RevBayes container and execute a job script
     - *Usage:* `docker run --name my_job_name --volume /Users/Sarah/projects/rev-docker:/mnt/project sswiston/rb_tp:latest rb /mnt/project/test.Rev"
 
-## GUI job
+## Interactive job (through GUI)
 - Open Docker Desktop
 - Go to Images tab
 - Click Run on image you want to run (e.g. `sswiston/rb_tp:latest`)
